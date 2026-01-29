@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anti-Lost Bluetooth Tracker</title>
+<style>
+body {
+  margin:0;
+  font-family: Arial, sans-serif;
+  background:#fff;
+  color:#000;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+h1 { text-align:center; font-size:32px; margin-bottom:20px; }
+
+.product-top {
+  display:flex;
+  flex-wrap:wrap;
+  gap:20px;
+  align-items:flex-start;
+  justify-content:center;
+}
+
+.slider {
+  position: relative;
+  max-width:300px;
+  flex:1;
+  overflow:hidden;
+  border:1px solid #000;
+  border-radius:6px;
+}
+
+.slides {
+  width:100%;
+  display:none;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+
+.prev, .next {
+  cursor:pointer;
+  position:absolute;
+  top:40%;
+  padding:10px;
+  color:#000;
+  font-weight:bold;
+  font-size:18px;
+  user-select:none;
+  background: rgba(255,255,255,0.6);
+  border-radius:50%;
+}
+
+.prev{left:5px;}
+.next{right:5px;}
+
+.dot-container{
+  text-align:center;
+  margin-top:10px;
+}
+
+.dot{
+  display:inline-block;
+  width:12px;
+  height:12px;
+  margin:0 3px;
+  background:#000;
+  border-radius:50%;
+  cursor:pointer;
+}
+
+.active-dot{background:#777;}
+
+.main-features {
+  flex:1;
+  min-width:250px;
+  text-align:left;
+}
+
+.main-features h2{font-size:22px; margin-bottom:10px;}
+.main-features ul{list-style-type:disc; padding-left:20px;}
+
+.additional {
+  margin-top:30px;
+  text-align:center;
+}
+
+select {
+  padding:8px;
+  margin-top:15px;
+  font-size:16px;
+}
+
+.price{
+  font-size:22px;
+  font-weight:bold;
+  margin:15px 0;
+}
+
+.buy-btn{
+  display:inline-block;
+  margin-top:15px;
+  padding:15px 40px;
+  text-decoration:none;
+  color:#fff;
+  background:#000;
+  border-radius:6px;
+  font-weight:bold;
+}
+
+.buy-btn:hover{opacity:0.85;}
+
+footer{
+  text-align:center;
+  font-size:14px;
+  color:#777;
+  margin:50px 0 20px 0;
+}
+
+@media(max-width:768px){
+  .product-top {flex-direction:column; align-items:center;}
+  .main-features{text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+<h1>Anti-Lost Bluetooth Tracker</h1>
+
+<div class="product-top">
+  <div class="slider">
+    <img class="slides" src="https://m.media-amazon.com/images/I/61wOWXcswIL._AC_UF1000,1000_QL80_.jpg" alt="Tracker front">
+    <img class="slides" src="https://m.media-amazon.com/images/I/61VqzKBdtZL.jpg" alt="Tracker side">
+    <img class="slides" src="https://tklf-store.myshopify.com/cdn/shop/products/product-image-675104717_530x%402x.jpg?v=1571726365" alt="Tracker back">
+    <img class="slides" src="https://i.ebayimg.com/images/g/wD8AAOSw-f5oJzkD/s-l1200.jpg" alt="Tracker usage">
+
+    <div class="prev" onclick="changeSlide(-1)">&#10094;</div>
+    <div class="next" onclick="changeSlide(1)">&#10095;</div>
+
+    <div class="dot-container">
+      <span class="dot" onclick="currentSlide(1)"></span>
+      <span class="dot" onclick="currentSlide(2)"></span>
+      <span class="dot" onclick="currentSlide(3)"></span>
+      <span class="dot" onclick="currentSlide(4)"></span>
+    </div>
+  </div>
+
+  <div class="main-features">
+    <h2>Főbb jellemzők</h2>
+    <ul>
+      <li>Bluetooth kapcsolat iOS és Android telefonokhoz</li>
+      <li>Kis méret, hordozható, kulcstartóra tehető</li>
+      <li>Elem: CR2032 (hosszú készenléti idő)</li>
+      <li>Tárgy helyének nyomon követése alkalmazással (FindMy vagy hasonló)</li>
+      <li>Egyszerű és gyors használat, bárki számára</li>
+    </ul>
+    <label for="color">Színválasztó:</label>
+    <select id="color" onchange="changeColor(this.value)">
+      <option value="black">Fekete</option>
+      <option value="white">Fehér</option>
+      <option value="blue">Kék</option>
+    </select>
+    <div class="price">Ár: kb. 8 000–12 000 Ft / db</div>
+    <a href="#" class="buy-btn" onclick="alert('Itt lehetne a fizetési folyamat')">Vásárlás</a>
+  </div>
+</div>
+
+<div class="additional">
+  <h2>Részletes leírás</h2>
+  <p>
+    Ez a Bluetooth anti-vesztő tracker segít megtalálni elveszett tárgyakat, például kulcsokat, pénztárcát vagy táskát.  
+    A készülék csatlakoztatható iOS és Android telefonokhoz, és az alkalmazásban (pl. FindMy) azonnal látható a tárgy helye.  
+    A tracker riasztással figyelmeztet, ha a tárgy túl messze kerül, és segítségével gyorsan megtalálhatod a kulcsokat, táskát, vagy pénztárcát.  
+    Kis mérete miatt kulcstartóra vagy táskára rögzíthető, így mindig kéznél van.
+  </p>
+</div>
+
+<footer>© 2026 Anti-Lost Tracker · Minden jog fenntartva</footer>
+</div>
+
+<script>
+let colorImages = {
+  black: [
+    "https://m.media-amazon.com/images/I/61wOWXcswIL._AC_UF1000,1000_QL80_.jpg",
+    "https://m.media-amazon.com/images/I/61VqzKBdtZL.jpg",
+    "https://tklf-store.myshopify.com/cdn/shop/products/product-image-675104717_530x%402x.jpg?v=1571726365",
+    "https://i.ebayimg.com/images/g/wD8AAOSw-f5oJzkD/s-l1200.jpg"
+  ],
+  white: [
+    "https://example.com/white1.jpg",
+    "https://example.com/white2.jpg",
+    "https://example.com/white3.jpg",
+    "https://example.com/white4.jpg"
+  ],
+  blue: [
+    "https://example.com/blue1.jpg",
+    "https://example.com/blue2.jpg",
+    "https://example.com/blue3.jpg",
+    "https://example.com/blue4.jpg"
+  ]
+};
+
+let slideIndex = 1;
+
+function showSlides(n) {
+  let slides = document.getElementsByClassName("slides");
+  let dots = document.getElementsByClassName("dot");
+  if(n>slides.length) slideIndex=1;
+  if(n<1) slideIndex=slides.length;
+  for(let i=0;i<slides.length;i++){
+    slides[i].style.opacity=0;
+    slides[i].style.display="none";
+  }
+  for(let i=0;i<dots.length;i++){dots[i].className=dots[i].className.replace(" active-dot","");}
+  slides[slideIndex-1].style.display="block";
+  setTimeout(()=>{slides[slideIndex-1].style.opacity=1;},50);
+  dots[slideIndex-1].className += " active-dot";
+}
+
+function changeSlide(n) { showSlides(slideIndex += n); }
+function currentSlide(n) { showSlides(slideIndex = n); }
+
+function changeColor(color){
+  let slides = document.getElementsByClassName("slides");
+  for(let i=0;i<slides.length;i++){
+    slides[i].src = colorImages[color][i];
+  }
+  slideIndex=1;
+  showSlides(slideIndex);
+}
+
+// inicializálás
+showSlides(slideIndex);
+</script>
+
+</body>
+</html>
