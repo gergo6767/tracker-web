@@ -105,15 +105,22 @@ select {
 .buy-btn{
   display:inline-block;
   margin-top:15px;
-  padding:15px 40px;
+  padding:12px 30px;
+  font-size:18px;
+  font-weight:bold;
   text-decoration:none;
   color:#fff;
-  background:#000;
+  background-color:#000;
+  border:none;
   border-radius:6px;
-  font-weight:bold;
+  cursor:pointer;
+  transition: background 0.3s, transform 0.2s;
 }
 
-.buy-btn:hover{opacity:0.85;}
+.buy-btn:hover{
+  background-color:#333;
+  transform: scale(1.05);
+}
 
 footer{
   text-align:center;
@@ -127,7 +134,6 @@ footer{
   .main-features{text-align:center;}
 }
 </style>
-  
 </head>
 
 <body>
@@ -136,6 +142,7 @@ footer{
 <h1>Anti-Lost Bluetooth Tracker</h1>
 
 <div class="product-top">
+  <!-- Slider -->
   <div class="slider">
     <img class="slides" src="https://m.media-amazon.com/images/I/61wOWXcswIL._AC_UF1000,1000_QL80_.jpg" alt="Tracker front">
     <img class="slides" src="https://m.media-amazon.com/images/I/61VqzKBdtZL.jpg" alt="Tracker side">
@@ -153,6 +160,7 @@ footer{
     </div>
   </div>
 
+  <!-- Termék jellemzők -->
   <div class="main-features">
     <h2>Főbb jellemzők</h2>
     <ul>
@@ -162,22 +170,25 @@ footer{
       <li>Tárgy helyének nyomon követése alkalmazással (FindMy vagy hasonló)</li>
       <li>Egyszerű és gyors használat, bárki számára</li>
     </ul>
+
     <label for="color">Színválasztó:</label>
     <select id="color" onchange="changeColor(this.value)">
       <option value="black">Fekete</option>
       <option value="white">Fehér</option>
-      <option value="pink">Pink</option>
+      <option value="blue">Kék</option>
     </select>
+
     <div class="price">Ár: 4 990 Ft / db</div>
 
-<a href="https://buy.stripe.com/test_fZueVfd4ZdRY35Td8H9oc00"
-   target="_blank"
-   class="buy-button">
-  Vásárlás
-</a>
-    
+    <a href="https://buy.stripe.com/test_fZueVfd4ZdRY35Td8H9oc00"
+       target="_blank"
+       class="buy-btn">
+      Vásárlás
+    </a>
+  </div>
 </div>
 
+<!-- Részletes leírás -->
 <div class="additional">
   <h2>Részletes leírás</h2>
   <p>
@@ -192,6 +203,7 @@ footer{
 </div>
 
 <script>
+// Színkép váltás
 let colorImages = {
   black: [
     "https://m.media-amazon.com/images/I/61wOWXcswIL._AC_UF1000,1000_QL80_.jpg",
@@ -248,6 +260,7 @@ showSlides(slideIndex);
 
 </body>
 </html>
+
 
 
 
