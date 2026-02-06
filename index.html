@@ -23,32 +23,28 @@
 <meta name="twitter:description" content="Bluetooth GPS tracker, kulcsok, táskák és egyéb értékek nyomon követésére. Kis méretű, hordozható, iOS és Android kompatibilis.">
 <meta name="twitter:image" content="https://m.media-amazon.com/images/I/61wOWXcswIL._AC_UF1000,1000_QL80_.jpg">
 
-<!-- Favicon -->
 <link rel="icon" href="https://yourwebsite.com/favicon.ico" type="image/x-icon">
 
 <style>
-/* Alap stílus, trendi Poppins font */
 body {
   margin:0;
   font-family: 'Poppins', Arial, sans-serif;
-  background:#fff;
+  background:#f8f8f8;
   color:#111;
   line-height:1.6;
 }
 
-/* Container */
 .container {
   max-width: 1000px;
   margin: 40px auto;
   padding: 0 20px;
 }
 
-/* Címsorok */
 h1 {
   text-align:center;
-  font-size:36px;
+  font-size:38px;
   font-weight:700;
-  margin-bottom:20px;
+  margin-bottom:30px;
   letter-spacing:1px;
   color:#222;
 }
@@ -60,31 +56,43 @@ h2 {
   color:#333;
 }
 
-/* Termék top szekció */
 .product-top {
   display:flex;
   flex-wrap:wrap;
-  gap:20px;
-  align-items:flex-start;
+  gap:30px;
   justify-content:center;
+  align-items:flex-start;
 }
 
-/* Slider stílus */
+/* Slider kártya */
 .slider {
   position: relative;
-  max-width:300px;
+  max-width:320px;
   flex:1;
   overflow:hidden;
-  border:1px solid #ddd;
-  border-radius:12px;
-  box-shadow:0 6px 12px rgba(0,0,0,0.08);
+  border-radius:16px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background:#fff;
 }
 
+.slider:hover {
+  transform: translateY(-8px);
+  box-shadow:0 16px 30px rgba(0,0,0,0.15);
+}
+
+/* Slider képek hover animáció */
 .slides {
   width:100%;
   display:none;
-  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-  border-radius:12px;
+  transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out, box-shadow 0.3s;
+  border-radius:16px;
+  cursor:pointer;
+}
+
+.slides:hover {
+  transform: scale(1.05);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.25);
 }
 
 .prev, .next {
@@ -105,8 +113,8 @@ h2 {
   background: rgba(0,0,0,0.6);
 }
 
-.prev{left:5px;}
-.next{right:5px;}
+.prev{left:8px;}
+.next{right:8px;}
 
 .dot-container{
   text-align:center;
@@ -125,7 +133,7 @@ h2 {
 }
 
 .dot:hover{
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 .active-dot{
@@ -133,11 +141,20 @@ h2 {
   box-shadow:0 0 4px rgba(0,0,0,0.3);
 }
 
-/* Termék jellemzők */
+/* Termék info kártya */
 .main-features {
   flex:1;
-  min-width:250px;
-  text-align:left;
+  min-width:300px;
+  background:#fff;
+  border-radius:16px;
+  padding:25px;
+  box-shadow:0 8px 20px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.main-features:hover {
+  transform: translateY(-6px);
+  box-shadow:0 16px 30px rgba(0,0,0,0.15);
 }
 
 .main-features ul {
@@ -147,15 +164,14 @@ h2 {
 }
 
 .main-features li {
-  margin-bottom:10px;
+  margin-bottom:12px;
 }
 
-/* Színválasztó */
 select {
   padding:10px;
   margin-top:15px;
   font-size:16px;
-  border-radius:6px;
+  border-radius:8px;
   border:1px solid #ccc;
   cursor:pointer;
   transition: all 0.2s;
@@ -164,59 +180,55 @@ select {
 select:focus {
   outline:none;
   border-color:#ff5e62;
-  box-shadow:0 4px 6px rgba(255,94,98,0.2);
+  box-shadow:0 4px 8px rgba(255,94,98,0.2);
   transform: translateY(-2px);
 }
 
-/* Ár */
 .price{
-  font-size:24px;
+  font-size:26px;
   font-weight:600;
   margin:15px 0;
   color:#ff5e62;
 }
 
-/* Vásárlás gomb */
 .buy-btn{
   display:inline-block;
   margin-top:15px;
   padding:16px 50px;
   font-size:18px;
-  font-weight:600;
+  font-weight:700;
   text-decoration:none;
   color:#fff;
   background: linear-gradient(90deg, #ff5e62, #ff9966);
   border:none;
-  border-radius:10px;
+  border-radius:12px;
   cursor:pointer;
   transition: all 0.3s;
-  letter-spacing:0.5px;
-  box-shadow:0 6px 12px rgba(0,0,0,0.15);
+  letter-spacing:0.6px;
+  box-shadow:0 8px 18px rgba(0,0,0,0.15);
 }
 
 .buy-btn:hover{
   transform: scale(1.05);
-  box-shadow:0 8px 16px rgba(0,0,0,0.2);
+  box-shadow:0 12px 26px rgba(0,0,0,0.25);
   background: linear-gradient(90deg, #ff9966, #ff5e62);
 }
 
-/* Részletes leírás */
 .additional {
-  margin-top:30px;
+  margin-top:40px;
   text-align:center;
   font-size:16px;
   color:#444;
+  line-height:1.8;
 }
 
-/* Footer */
 footer{
   text-align:center;
   font-size:14px;
   color:#777;
-  margin:50px 0 20px 0;
+  margin:60px 0 20px 0;
 }
 
-/* Mobil optimalizálás */
 @media(max-width:768px){
   .product-top {flex-direction:column; align-items:center;}
   .main-features{text-align:center;}
@@ -225,14 +237,12 @@ footer{
 }
 </style>
 </head>
-
 <body>
 
 <div class="container">
 <h1>Elhagyás elleni GPS nyomkövető</h1>
 
 <div class="product-top">
-  <!-- Slider -->
   <div class="slider">
     <img class="slides" src="https://m.media-amazon.com/images/I/61wOWXcswIL._AC_UF1000,1000_QL80_.jpg" alt="Tracker front">
     <img class="slides" src="https://m.media-amazon.com/images/I/61VqzKBdtZL.jpg" alt="Tracker side">
@@ -250,7 +260,6 @@ footer{
     </div>
   </div>
 
-  <!-- Termék jellemzők -->
   <div class="main-features">
     <h2>Főbb jellemzők</h2>
     <ul>
@@ -270,15 +279,10 @@ footer{
 
     <div class="price">Ár: 4 990 Ft / db</div>
 
-    <a href="https://buy.stripe.com/aFa4gy3TU7Or5Sm3kb1oI02"
-       target="_blank"
-       class="buy-btn">
-      Vásárlás
-    </a>
+    <a href="https://buy.stripe.com/aFa4gy3TU7Or5Sm3kb1oI02" target="_blank" class="buy-btn">Vásárlás</a>
   </div>
 </div>
 
-<!-- Részletes leírás -->
 <div class="additional">
   <h2>Részletes leírás</h2>
   <p>
@@ -289,7 +293,7 @@ footer{
   </p>
 </div>
 
-<footer>© 2026. GG Products.  · Minden jog fenntartva</footer>
+<footer>© 2026. GG Products · Minden jog fenntartva</footer>
 </div>
 
 <script>
@@ -353,13 +357,7 @@ function changeColor(color){
 }
 
 showSlides(slideIndex);
-
-// Automatikus slider 3 mp-ként
-setInterval(()=>{
-  slideIndex++;
-  showSlides(slideIndex);
-},3000);
+setInterval(()=>{ slideIndex++; showSlides(slideIndex); },3000);
 </script>
-
 </body>
 </html>
