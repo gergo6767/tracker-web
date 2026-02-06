@@ -18,7 +18,11 @@ body {
   padding: 0 20px;
 }
 
-h1 { text-align:center; font-size:32px; margin-bottom:20px; }
+h1 {
+  text-align:center;
+  font-size:32px;
+  margin-bottom:20px;
+}
 
 .product-top {
   display:flex;
@@ -54,6 +58,11 @@ h1 { text-align:center; font-size:32px; margin-bottom:20px; }
   user-select:none;
   background: rgba(255,255,255,0.6);
   border-radius:50%;
+  transition: background 0.2s;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.2);
 }
 
 .prev{left:5px;}
@@ -72,6 +81,11 @@ h1 { text-align:center; font-size:32px; margin-bottom:20px; }
   background:#000;
   border-radius:50%;
   cursor:pointer;
+  transition: background 0.3s, transform 0.2s;
+}
+
+.dot:hover{
+  transform: scale(1.2);
 }
 
 .active-dot{background:#777;}
@@ -94,6 +108,15 @@ select {
   padding:8px;
   margin-top:15px;
   font-size:16px;
+  border-radius:6px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor:pointer;
+}
+
+select:focus {
+  outline:none;
+  transform: translateY(-3px);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .price{
@@ -102,24 +125,27 @@ select {
   margin:15px 0;
 }
 
+/* Színátmenetes, animált vásárlás gomb */
 .buy-btn{
   display:inline-block;
   margin-top:15px;
-  padding:12px 30px;
+  padding:14px 40px;
   font-size:18px;
   font-weight:bold;
   text-decoration:none;
   color:#fff;
-  background-color:#000;
+  background: linear-gradient(90deg, #ff5e62, #ff9966);
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
-  transition: background 0.3s, transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 }
 
 .buy-btn:hover{
-  background-color:#333;
   transform: scale(1.05);
+  box-shadow: 0 6px 10px rgba(0,0,0,0.3);
+  background: linear-gradient(90deg, #ff9966, #ff5e62);
 }
 
 footer{
@@ -129,9 +155,12 @@ footer{
   margin:50px 0 20px 0;
 }
 
+/* Mobil optimalizálás */
 @media(max-width:768px){
   .product-top {flex-direction:column; align-items:center;}
   .main-features{text-align:center;}
+  .slider {max-width:90%;}
+  .buy-btn{width:80%; padding:14px 0;}
 }
 </style>
 </head>
@@ -171,7 +200,7 @@ footer{
       <li>Egyszerű és gyors használat, bárki számára</li>
     </ul>
 
-    <label for="color">Szín:</label>
+    <label for="color">Színválasztó:</label>
     <select id="color" onchange="changeColor(this.value)">
       <option value="black">Fekete</option>
       <option value="white">Fehér</option>
@@ -199,11 +228,10 @@ footer{
   </p>
 </div>
 
-<footer>© 2026 GG Products.  · Minden jog fenntartva</footer>
+<footer>© 2026 Elhagyás elleni GPS nyomkövető · Minden jog fenntartva</footer>
 </div>
 
 <script>
-// Színkép váltás
 let colorImages = {
   black: [
     "https://m.media-amazon.com/images/I/61wOWXcswIL._AC_UF1000,1000_QL80_.jpg",
@@ -217,62 +245,60 @@ let colorImages = {
     "https://example.com/white3.jpg",
     "https://example.com/white4.jpg"
   ],
-  blue: [
-    "https://example.com/blue1.jpg",
-    "https://example.com/blue2.jpg",
-    "https://example.com/blue3.jpg",
-    "https://example.com/blue4.jpg"
+  pink: [
+    "https://example.com/pink1.jpg",
+    "https://example.com/pink2.jpg",
+    "https://example.com/pink3.jpg",
+    "https://example.com/pink4.jpg"
   ]
 };
 
-let slideIndex = 1;
+let slideIndex = 0;
+let slides, dots;
 
-function showSlides(n) {
-  let slides = document.getElementsByClassName("slides");
-  let dots = document.getElementsByClassName("dot");
-  if(n>slides.length) slideIndex=1;
-  if(n<1) slideIndex=slides.length;
+function showSlides(n){
+  slides = document.getElementsByClassName("slides");
+  dots = document.getElementsByClassName("dot");
+  if(n>=slides.length) slideIndex=0;
+  if(n<0) slideIndex=slides.length-1;
   for(let i=0;i<slides.length;i++){
-    slides[i].style.opacity=0;
     slides[i].style.display="none";
+    slides[i].style.opacity=0;
   }
-  for(let i=0;i<dots.length;i++){dots[i].className=dots[i].className.replace(" active-dot","");}
-  slides[slideIndex-1].style.display="block";
-  setTimeout(()=>{slides[slideIndex-1].style.opacity=1;},50);
-  dots[slideIndex-1].className += " active-dot";
+  for(let i=0;i<dots.length;i++){
+    dots[i].className = dots[i].className.replace(" active-dot","");
+  }
+  slides[slideIndex].style.display="block";
+  setTimeout(()=>{slides[slideIndex].style.opacity=1;},50);
+  dots[slideIndex].className += " active-dot";
 }
 
-function changeSlide(n) { showSlides(slideIndex += n); }
-function currentSlide(n) { showSlides(slideIndex = n); }
-
-function changeColor(color){
-  let slides = document.getElementsByClassName("slides");
-  for(let i=0;i<slides.length;i++){
-    slides[i].src = colorImages[color][i];
-  }
-  slideIndex=1;
+function changeSlide(n){ 
+  slideIndex += n;
+  showSlides(slideIndex);
+}
+function currentSlide(n){
+  slideIndex = n-1;
   showSlides(slideIndex);
 }
 
-// inicializálás
+function changeColor(color){
+  slides = document.getElementsByClassName("slides");
+  for(let i=0;i<slides.length;i++){
+    slides[i].src = colorImages[color][i];
+  }
+  slideIndex=0;
+  showSlides(slideIndex);
+}
+
 showSlides(slideIndex);
+
+// Automatikus slider 3 mp-ként
+setInterval(()=>{
+  slideIndex++;
+  showSlides(slideIndex);
+},3000);
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
